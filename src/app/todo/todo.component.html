@@ -1,0 +1,35 @@
+<div class="todo">
+  <div class="todo__form">
+    <input
+      class="todo__input draw"
+      type="text"
+      placeholder="Введите новую задачу..."
+      [(ngModel)]="inputValue"
+      (keydown)="onKeyDownHandler($event)"
+    />
+    <button class="todo__button" type="button" (click)="onSendHandler()">
+      Создать
+    </button>
+  </div>
+  <ng-template #noTasks>
+    <h2 class="todo__empty">Нету больше задач 😥</h2>
+  </ng-template>
+
+  <div
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListData]="todoList"
+    class="todo__list"
+    *ngIf="todoList.length; else noTasks"
+  >
+    <todo-card
+      (checkedTodo)="editTask($event)"
+      class="todo__card"
+      cdkDrag
+      *ngFor="let todo of todoList"
+      [onEdit]="onEditTaskHandler.bind(this)"
+      [onDelete]="onDeleteHandler.bind(this)"
+      [todo]="todo"
+    ></todo-card>
+  </div>
+</div>

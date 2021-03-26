@@ -1,0 +1,71 @@
+input[type="checkbox"]:checked + .card__checkbox::after {
+  border-color: green;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.card__content {
+  display: flex;
+  align-items: center;
+}
+
+.card__checkbox {
+  width: 32px;
+  height: 32px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.card__checkbox::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 24px;
+  border: solid transparent;
+  border-width: 0 1px 1px 0;
+  transform: translateX(10px) translateY(0px) rotate(45deg);
+}
+
+.card__note {
+  font-size: 25px;
+  padding-left: 16px;
+  word-break: break-word;
+}
+
+.card__menu {
+  display: flex;
+  width: 200px;
+  align-self: center;
+}
+
+.card__input {
+  width: 250px;
+  height: 40px;
+  border: 1px solid lightgrey;
+  border-radius: 5;
+  padding: 15px;
+}
+
+.card__input:focus {
+  border: 0px solid transparent;
+  transition: border 0.75s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  border: 1px solid rgba(54, 110, 231, 0.25);
+}
+
+.card__button {
+  border: none;
+  padding: none;
+  width: 95px;
+  padding: 0;
+  height: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.card__button:nth-child(n):not(:first-child) {
+  margin-left: 10px;
+}

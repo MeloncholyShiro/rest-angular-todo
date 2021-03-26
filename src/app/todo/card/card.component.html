@@ -1,0 +1,47 @@
+<div class="card">
+  <div class="card__content">
+    <input
+      [id]="todo.id"
+      type="checkbox"
+      hidden
+      [(ngModel)]="done"
+      (ngModelChange)="checkHandler()"
+      *ngIf="!isOnEdit"
+    />
+    <label class="card__checkbox" [for]="todo.id" *ngIf="!isOnEdit"></label>
+    <p class="card__note" *ngIf="!isOnEdit">{{ todo.note }}</p>
+
+    <input
+      *ngIf="isOnEdit"
+      class="card__input"
+      type="text"
+      [(ngModel)]="onEditInputValue"
+      (keydown)="onKeyDownHandler($event)"
+    />
+  </div>
+  <div class="card__menu">
+    <button
+      class="card__button"
+      *ngIf="!isOnEdit"
+      (click)="setTaskToEdit()"
+      type="button"
+    >
+      Редактировать
+    </button>
+    <button
+      class="card__button"
+      *ngIf="!isOnEdit"
+      (click)="onDelete(todo.id)"
+      type="button"
+    >
+      Удалить
+    </button>
+    <button
+      class="card__button"
+      *ngIf="isOnEdit"
+      (click)="onClickHandler()"
+    >
+      Сохранить
+    </button>
+  </div>
+</div>

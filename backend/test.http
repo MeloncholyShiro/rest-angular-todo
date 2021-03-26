@@ -1,0 +1,22 @@
+POST http://localhost:1337/todo HTTP/1.1
+content-type: application/json
+
+{
+    "note": "Add World!!!!"
+}
+
+###
+
+DELETE http://localhost:1337/todo HTTP/1.1
+
+
+###
+
+POST http://localhost:1337/todo/Q6IIE_4UCwlXUAkBIByls HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": "Q6IIE_4UCwlXUAkBIByls",
+  "note": "KEK",
+  "done": true
+}
