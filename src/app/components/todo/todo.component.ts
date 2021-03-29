@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoService } from './todo.service';
+import { TodoService } from './services/todo.service';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -43,14 +43,14 @@ export class TodoComponent implements OnInit {
 
   addTask(note: string): void {
     this.todoService
-      .addTodo(({ note } as unknown) as Todo[]) // Как это брехня работать должна?
+      .addTodo({ note } as Todo) // Как это брехня работать должна?
       .subscribe((todoList: any) => (this.todoList = todoList.list)); // Сгорела жопа на этом моменте, я не понимаю как эта "Великолепная конструкция" принимает в себя типы, наугад что ли?
   }
 
   editTask(todoToEdit: Todo): void {
     this.todoService
       .editTodo(todoToEdit)
-      .subscribe((todoList: any) => (this.todoList = todoList.list));
+      .subscribe((todoList: any) => (this.todoList = todoList));
   }
 
   deleteTask(taskID: string): void {

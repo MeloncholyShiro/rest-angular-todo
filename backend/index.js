@@ -120,7 +120,7 @@ async function checkDatabase() {
 async function start() {
   try {
     await checkDatabase();
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.info(
         `Database has been connected. Used local-file database: ${databaseFile}`
       );
