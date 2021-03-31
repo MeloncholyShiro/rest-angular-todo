@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
-import { MessageService } from './message.service';
+import { MessageService } from './Message/message.service';
 
 /** Type of the handleError function returned by HttpErrorHandler.createHandleError */
 export type HandleError = <T>(
@@ -18,7 +18,7 @@ export class HttpErrorHandler {
 
   /** Create curried handleError function that already knows the service name */
   createHandleError = (serviceName = '') => {
-    return <T>(operation = 'operation', result = {} as T) =>
+    return <T>(operation: string, result: T) =>
       this.handleError(serviceName, operation, result);
   };
 
@@ -29,8 +29,8 @@ export class HttpErrorHandler {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  handleError<T>(serviceName = '', operation = 'operation', result = {} as T) {
-    return (error: HttpErrorResponse): Observable<T> => {
+  handleError<T>(serviceName = '', operation: string = 'operation', result: unknown) {
+    return (error: HttpErrorResponse): Observable<T | unknown> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
@@ -45,7 +45,7 @@ export class HttpErrorHandler {
       );
 
       // Let the app keep running by returning a safe result.
-      return of(result);
+      return throwError(err);
     };
   }
 }

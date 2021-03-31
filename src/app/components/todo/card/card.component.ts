@@ -1,4 +1,4 @@
-import { EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { Todo } from '../todo.component';
 
@@ -6,12 +6,15 @@ import { Todo } from '../todo.component';
   selector: 'todo-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnInit {
   @Input() todo: Todo;
   @Input() onEdit: (editedTask: Todo) => void;
   @Input() onDelete: (taskID: string) => void;
+  
   @Output() checkedTodo = new EventEmitter<Todo>();
+
   done: boolean;
   isOnEdit: boolean;
   onEditInputValue: string;
